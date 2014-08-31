@@ -1,0 +1,10 @@
+.gitignore
+Changes
+MANIFEST
+LICENCE
+Makefile.PL
+README
+lib/Text/Fy/Utils.pm
+t/0010_test.t
+META.yml
+META.json
