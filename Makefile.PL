@@ -1,10 +1,11 @@
-use 5.008;
+use 5.020;
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker 6.48;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
     NAME              => 'Text::Fy::Utils',
+    MIN_PERL_VERSION  => 5.020,
     VERSION_FROM      => 'lib/Text/Fy/Utils.pm', # finds $VERSION
     PREREQ_PM         => { }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
