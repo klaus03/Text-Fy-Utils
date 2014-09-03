@@ -11,7 +11,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT    = qw();
 our @EXPORT_OK = qw(set_amode asciify commify);
-our $VERSION   = '0.02';
+our $VERSION   = '0.03';
 
 my $p_amd = [ 0, 0 ];
 
@@ -76,9 +76,20 @@ my %uni_to_ascii = (
   "\x{00f8}" => q{o},
 );
 
+my %uni_to_iso = (
+  "\x{2013}" => q{-},
+  "\x{2014}" => q{-},
+  "\x{2018}" => q{'},
+  "\x{2019}" => q{'},
+  "\x{201c}" => q{"},
+  "\x{201d}" => q{"},
+  "\x{2026}" => q{_},
+);
+
 my $convert_c2u = _make_tr(\%cp1252_to_uni);
 my $convert_u2c = _make_tr(\%cp1252_to_uni, 'R');
 my $convert_u2a = _make_tr(\%uni_to_ascii);
+my $convert_u2i = _make_tr(\%uni_to_iso);
 
 sub _make_tr {
     my ($href, $rev) = @_;
@@ -99,6 +110,8 @@ sub asciify {
     my ($text, $opt) = @_;
 
     my ($loc_m, $loc_w) = @{$opt ? _make_amode($opt) : $p_amd};
+
+    $convert_u2i->($text);
 
     if ($loc_w) { # windows cp1252
         $convert_c2u->($text);
@@ -178,17 +191,17 @@ Text::Fy::Utils - Some text based utility functions
     use Text::Fy::Utils qw(set_amode asciify commify);
 
     my $t1 =
-      "\x{041}\x{062}\x{043} => ". # A b C (ASCII)
-      "\x{08a}\x{08c}\x{08e} => ". # Š Œ Ž (Windows)
-      "\x{091}\x{092}\x{093} => ". # ‘ ’ “ (Windows)
-      "\x{0a1}\x{0a2}\x{0bf} => ". # ¡ ¢ ¿ (ISO)
-      "\x{0bc}\x{0bd}\x{0be} => ". # ¼ ½ ¾ (ISO)
-      "\x{0c6}\x{0c7}\x{0c8} => "; # Æ Ç È (ISO)
+      "\x{041}\x{062}\x{043} => ".
+      "\x{08a}\x{08c}\x{08e} => ".
+      "\x{091}\x{092}\x{093} => ".
+      "\x{0a1}\x{0a2}\x{0bf} => ".
+      "\x{0bc}\x{0bd}\x{0be} => ".
+      "\x{0c6}\x{0c7}\x{0c8} => ";
 
     my $t2 =
-      "\x{172}\x{173}\x{174} => ". # U U W (Unicode)
-      "\x{388}\x{389}\x{38a} => ". # E H I (Unicode)
-      "\x{3b1}\x{3b2}\x{3b3} => "; # A B C (Unicode - Greek)
+      "\x{172}\x{173}\x{174} => ".
+      "\x{388}\x{389}\x{38a} => ".
+      "\x{3b1}\x{3b2}\x{3b3} => ";
 
     my $asc1 = asciify($t1.$t2, [ 'pure' ]);
     my $asc2 = asciify($t1.$t2, [ 'pure', 'win' ]);

@@ -1,5 +1,11 @@
 Revision history for Text-Fy-Utils
 
+0.03 2014-09-03T22:50:11+01:00
+
+  [ENHANCEMENTS]
+
+  - added conversion of unicode characters ",',-,...
+
 0.02 2014-08-31T19:04:50+01:00
 
   [ENHANCEMENTS]

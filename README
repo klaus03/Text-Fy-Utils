@@ -1,4 +1,4 @@
-Acme-Fy-Utils Version 0.02
+Acme-Fy-Utils Version 0.03
 
 Text::Fy::Utils - Some text based utility functions
 
@@ -7,17 +7,17 @@ SYNOPSIS
     use Text::Fy::Utils qw(set_amode asciify commify);
 
     my $t1 =
-      "\x{041}\x{062}\x{043} => ". # A b C (ASCII)
-      "\x{08a}\x{08c}\x{08e} => ". # Š Œ Ž (Windows)
-      "\x{091}\x{092}\x{093} => ". # ‘ ’ “ (Windows)
-      "\x{0a1}\x{0a2}\x{0bf} => ". # ¡ ¢ ¿ (ISO)
-      "\x{0bc}\x{0bd}\x{0be} => ". # ¼ ½ ¾ (ISO)
-      "\x{0c6}\x{0c7}\x{0c8} => "; # Æ Ç È (ISO)
+      "\x{041}\x{062}\x{043} => ".
+      "\x{08a}\x{08c}\x{08e} => ".
+      "\x{091}\x{092}\x{093} => ".
+      "\x{0a1}\x{0a2}\x{0bf} => ".
+      "\x{0bc}\x{0bd}\x{0be} => ".
+      "\x{0c6}\x{0c7}\x{0c8} => ";
 
     my $t2 =
-      "\x{172}\x{173}\x{174} => ". # U U W (Unicode)
-      "\x{388}\x{389}\x{38a} => ". # E H I (Unicode)
-      "\x{3b1}\x{3b2}\x{3b3} => "; # A B C (Unicode - Greek)
+      "\x{172}\x{173}\x{174} => ".
+      "\x{388}\x{389}\x{38a} => ".
+      "\x{3b1}\x{3b2}\x{3b3} => ";
 
     my $asc1 = asciify($t1.$t2, [ 'pure' ]);
     my $asc2 = asciify($t1.$t2, [ 'pure', 'win' ]);
