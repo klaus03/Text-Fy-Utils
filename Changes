@@ -1,5 +1,11 @@
 Revision history for Text-Fy-Utils
 
+0.04 2014-09-05T21:13:40+01:00
+
+  [ENHANCEMENTS]
+
+  - added subroutines cv_from_win(), cv_to_win().
+
 0.03 2014-09-03T22:50:11+01:00
 
   [ENHANCEMENTS]

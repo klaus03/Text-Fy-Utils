@@ -10,8 +10,8 @@ use Encode qw(encode decode);
 require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT    = qw();
-our @EXPORT_OK = qw(set_amode asciify commify);
-our $VERSION   = '0.03';
+our @EXPORT_OK = qw(set_amode asciify commify cv_to_win cv_from_win);
+our $VERSION   = '0.04';
 
 my $p_amd = [ 0, 0 ];
 
@@ -140,6 +140,22 @@ sub asciify {
     return $text;
 }
 
+sub cv_from_win {
+    my ($buf) = @_;
+
+    $convert_c2u->($buf);
+
+    return $buf;
+}
+
+sub cv_to_win {
+    my ($buf) = @_;
+
+    $convert_u2c->($buf);
+
+    return $buf;
+}
+
 sub commify {
     local $_ = shift;
     my ($sep) = @_;
@@ -188,7 +204,10 @@ Text::Fy::Utils - Some text based utility functions
 
 =head1 SYNOPSIS
 
-    use Text::Fy::Utils qw(set_amode asciify commify);
+    use Text::Fy::Utils qw(
+      set_amode asciify commify
+      cv_from_win cv_to_win
+    );
 
     my $t1 =
       "\x{041}\x{062}\x{043} => ".
@@ -215,6 +234,9 @@ Text::Fy::Utils - Some text based utility functions
 
     my $out1 = commify('12345678.1234');
     my $out2 = commify('12345678.1234', '~');
+
+    my $out3 = cv_from_win($t1.$t2);
+    my $out4 = cv_to_win($t1.$t2);
 
 =head1 OTHER REFERENCES
 
