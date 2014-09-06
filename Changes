@@ -1,5 +1,13 @@
 Revision history for Text-Fy-Utils
 
+0.05 2014-09-06T14:54:37+01:00
+
+  [DOCUMENTATION]
+
+  - In Makefile.PL ==> meta files link to Github repository
+
+  - Add tests
+
 0.04 2014-09-05T21:13:40+01:00
 
   [ENHANCEMENTS]

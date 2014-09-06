@@ -8,7 +8,14 @@ WriteMakefile(
     MIN_PERL_VERSION  => 5.020,
     VERSION_FROM      => 'lib/Text/Fy/Utils.pm', # finds $VERSION
     PREREQ_PM         => { }, # e.g., Module::Name => 1.1
-    ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Text/Fy/Utils.pm', # retrieve abstract from module
-       AUTHOR         => 'Klaus Eichner <klaus03@gmail.com>') : ()),
+    ABSTRACT_FROM     => 'lib/Text/Fy/Utils.pm', # retrieve abstract from module
+    AUTHOR            => 'Klaus Eichner <klaus03@gmail.com>',
+	META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources => {
+        repository => {
+                type => 'git',
+                url  => 'https://github.com/klaus03/Text-Fy-Utils.git',
+                web  => 'https://github.com/klaus03/Text-Fy-Utils',
+    }}},
 );

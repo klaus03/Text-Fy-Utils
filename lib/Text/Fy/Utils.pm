@@ -11,7 +11,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT    = qw();
 our @EXPORT_OK = qw(set_amode asciify commify cv_to_win cv_from_win);
-our $VERSION   = '0.04';
+our $VERSION   = '0.05';
 
 my $p_amd = [ 0, 0 ];
 

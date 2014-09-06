@@ -37,5 +37,12 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.04"
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/klaus03/Text-Fy-Utils.git",
+         "web" : "https://github.com/klaus03/Text-Fy-Utils"
+      }
+   },
+   "version" : "0.05"
 }
