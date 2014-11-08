@@ -10,8 +10,8 @@ use Encode qw(encode decode);
 require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT    = qw();
-our @EXPORT_OK = qw(asciify isoify commify cv_to_win cv_from_win);
-our $VERSION   = '0.06';
+our @EXPORT_OK = qw(asciify isoify simplify commify cv_to_win cv_from_win);
+our $VERSION   = '0.07';
 
 my %cp1252_to_uni;
 
@@ -101,35 +101,19 @@ sub _make_tr {
 }
 
 sub asciify {
-    _aconvert($_[0], ['pure']);
+    _aconvert($_[0], 0, 0);
 }
 
 sub isoify {
-    _aconvert($_[0], ['iso']);
+    _aconvert($_[0], 1, 0);
+}
+
+sub simplify {
+    _aconvert($_[0], 2, 0);
 }
 
 sub _aconvert {
-    my ($text, $opt) = @_;
-
-    my ($loc_m, $loc_w) = (0, 0);
-
-    for (@$opt) {
-        if ($_ eq 'win') {
-            $loc_w = 1;
-        }
-        elsif ($_ eq 'pure') {
-            $loc_m = 0;
-        }
-        elsif ($_ eq 'iso') {
-            $loc_m = 1;
-        }
-        elsif ($_ eq 'brutal') {
-            $loc_m = 2;
-        }
-        else {
-            croak "Invalid identifier '$_'";
-        }
-    }
+    my ($text, $loc_m, $loc_w) = @_;
 
     $convert_u2i->($text);
 
@@ -201,7 +185,7 @@ Text::Fy::Utils - Some text based utility functions
 =head1 SYNOPSIS
 
     use Text::Fy::Utils qw(
-      asciify isoify commify
+      asciify isoify simplify commify
       cv_from_win cv_to_win
     );
 
@@ -218,13 +202,7 @@ Text::Fy::Utils - Some text based utility functions
       "\x{388}\x{389}\x{38a} => ".
       "\x{3b1}\x{3b2}\x{3b3} => ";
 
-    my $asc1 = Text::Fy::Utils::_aconvert($t1.$t2, [ 'pure' ]);
-    my $asc2 = Text::Fy::Utils::_aconvert($t1.$t2, [ 'pure', 'win' ]);
-    my $asc3 = Text::Fy::Utils::_aconvert($t1.$t2, [ 'brutal' ]);
-    my $asc4 = Text::Fy::Utils::_aconvert($t1.$t2, [ 'brutal', 'win' ]);
-    my $asc5 = Text::Fy::Utils::_aconvert($t1.$t2, [ 'iso' ]);
-    my $asc6 = Text::Fy::Utils::_aconvert($t1.$t2, [ 'iso', 'win' ]);
-
+    my $asc6 = simplify($t1.$t2);
     my $asc7 = asciify($t1.$t2);
     my $asc8 = isoify($t1.$t2);
 

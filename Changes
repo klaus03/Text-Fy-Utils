@@ -1,5 +1,11 @@
 Revision history for Text-Fy-Utils
 
+0.06 2014-11-08T19:36:21+01:00
+
+  [REFACTORING]
+
+  - Refactor, create new sub simplify()
+
 0.06 2014-11-08T18:16:32+01:00
 
   [REFACTORING]
