@@ -1,6 +1,12 @@
 Revision history for Text-Fy-Utils
 
-0.06 2014-11-08T19:36:21+01:00
+0.08 2014-11-08T19:44:04+01:00
+
+  [DOCUMENTATION]
+
+  - Fix version numbers in this very document...
+
+0.07 2014-11-08T19:36:21+01:00
 
   [REFACTORING]
 
