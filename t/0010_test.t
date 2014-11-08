@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 
-use Test::More tests => 12;
+use Test::More tests => 13;
 
 use_ok('Text::Fy::Utils', qw(
-  set_amode asciify commify
+  asciify isoify commify
   cv_from_win cv_to_win
 ));
 
@@ -15,15 +15,15 @@ my $t = "Ab".$r."\x{172}\x{173}\x{174}\x{178}\x{388}\x{389}\x{38a}\x{3b1}\x{3b2}
 
 my $v = "\x{9f}\x{178}\x{ff}\x{8a}\x{160}\x{ea}";
 
-is(asciify($t, [ 'pure' ]),          q~Ab?????????????????CEIyUuW~."Y"     .q~??????~, 'asciify([ pure ])');
-is(asciify($t, [ 'pure', 'win' ]),   q~Ab?S?Z???Y?????????CEIyUuW~."Y"     .q~??????~, 'asciify([ pure, win ])');
-is(asciify($t, [ 'brutal' ]),        q~Ab?????????!cY????ACEIyUuW~."Y"     .q~??????~, 'asciify([ brutal ])');
-is(asciify($t, [ 'brutal', 'win' ]), q~Ab%SOZ''"Y?!cY????ACEIyUuW~."Y"     .q~??????~, 'asciify([ brutal, win ])');
-is(asciify($t, [ 'iso' ]),           q~Ab~.$r              .q~UuW~."Y"     .q~??????~, 'asciify([ iso ])');
-is(asciify($t, [ 'iso', 'win' ]),    q~Ab~.$r              .q~UuW~."\x{9f}".q~??????~, 'asciify([ iso, win ])');
+is(Text::Fy::Utils::_aconvert($t, [ 'pure' ]),          q~Ab?????????????????CEIyUuW~."Y"     .q~??????~, 'aconvert([ pure ])');
+is(Text::Fy::Utils::_aconvert($t, [ 'pure', 'win' ]),   q~Ab?S?Z???Y?????????CEIyUuW~."Y"     .q~??????~, 'aconvert([ pure, win ])');
+is(Text::Fy::Utils::_aconvert($t, [ 'brutal' ]),        q~Ab?????????!cY????ACEIyUuW~."Y"     .q~??????~, 'aconvert([ brutal ])');
+is(Text::Fy::Utils::_aconvert($t, [ 'brutal', 'win' ]), q~Ab%SOZ''"Y?!cY????ACEIyUuW~."Y"     .q~??????~, 'aconvert([ brutal, win ])');
+is(Text::Fy::Utils::_aconvert($t, [ 'iso' ]),           q~Ab~.$r              .q~UuW~."Y"     .q~??????~, 'aconvert([ iso ])');
+is(Text::Fy::Utils::_aconvert($t, [ 'iso', 'win' ]),    q~Ab~.$r              .q~UuW~."\x{9f}".q~??????~, 'aconvert([ iso, win ])');
 
-set_amode([ 'brutal', 'win' ]);
-is(asciify($t),                      q~Ab%SOZ''"Y?!cY????ACEIyUuW~."Y"     .q~??????~, 'asciify--amode');
+is(asciify($t), q~Ab?????????????????CEIyUuW~."Y".q~??????~, 'asciify');
+is(isoify($t),  q~Ab~.$r              .q~UuW~."Y".q~??????~, 'isoify');
 
 is(cv_from_win($v), "\x{178}\x{178}\x{ff}\x{160}\x{160}\x{ea}", 'cv_from_win');
 is(cv_to_win($v)  , "\x{9f}\x{9f}\x{ff}\x{8a}\x{8a}\x{ea}",     'cv_to_win');

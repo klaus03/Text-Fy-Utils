@@ -1,5 +1,11 @@
 Revision history for Text-Fy-Utils
 
+0.06 2014-11-08T18:16:32+01:00
+
+  [REFACTORING]
+
+  - Refactor out asciify(), create new sub isoify()
+
 0.05 2014-09-06T14:54:37+01:00
 
   [DOCUMENTATION]
