@@ -1,5 +1,11 @@
 Revision history for Text-Fy-Utils
 
+0.10 - 2015-02-11T20:29:54+01:00
+
+  [ENHANCEMENTS]
+
+  - Additional iso-characters have been mapped into Ascii-space...
+
 0.09 - 2014-12-28T09:24:30+01:00
 
   [DOCUMENTATION]
